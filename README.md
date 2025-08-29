@@ -1,20 +1,49 @@
-# kaze-tes
+# 📊 Sentiment Dashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple sentiment analysis dashboard built with **Vue 3**, **Pinia**, and **ApexCharts**.  
+This project visualizes sentiment data per channel with filters, bar charts, and clean UI.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ✨ Features
 
-## Type Support for `.vue` Imports in TS
+- 📈 Interactive bar/pie/histogram chart with ApexCharts
+- 🎛️ Table Sendtiment (Searc, Sorting)   
+- 🎛️ Filter data by channels  
+- 🌗 Gradient background theme  
+- ⚡ Lazy loading chart component for performance  
+- 🗂️ State management with Pinia  
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+## 🛠️ Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- [Vue 3](https://vuejs.org/) - UI Framework  
+- [Pinia](https://pinia.vuejs.org/) - State Management  
+- [ApexCharts](https://apexcharts.com/) - Charting Library  
+- [Tailwind CSS](https://tailwindcss.com/) or custom CSS for styling  
 
-## Project Setup
+---
+
+src/
+├─ assets/ # Static assets (images, css)
+├─ components/ # Reusable components (Chart, Filter, etc.)
+├─ stores/ # Pinia store for sentiment data
+├─ views/ # Page views
+├─ App.vue # Main app entry
+└─ main.ts # Vue entry point
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```sh
+git clone https://github.com/ARKANnnur/kaze-tes.git
+```
+
+cd kaze-tes
+```sh
+cd kaze-tes
+```
 
 ```sh
 npm install
@@ -59,3 +88,5 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+
