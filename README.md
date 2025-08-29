@@ -85,10 +85,10 @@ npm run test:e2e
 
 ### Lint with [ESLint](https://eslint.org/)
 
-### DEMO [https://kaze-tes.vercel.app/](https://kaze-tes.vercel.app/)
-
 ```sh
 npm run lint
 ```
+
+### DEMO [https://kaze-tes.vercel.app/](https://kaze-tes.vercel.app/)
 
 
