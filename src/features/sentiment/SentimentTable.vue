@@ -121,6 +121,7 @@ const searchQuery = ref('')
 const sortField = ref('total')
 const sortDirection = ref('desc')
 
+// Load table data
 const tableData = computed(() => {
   const data = sentimentStore.rawData
   if (!data) return []
@@ -154,14 +155,22 @@ const tableData = computed(() => {
 const filteredAndSortedData = computed(() => {
   const rows = [...tableData.value]
 
-  // filter by search
-  const query = searchQuery.value.trim().toLowerCase()
-  const filtered = query ? rows.filter((r) => r.channel.toLowerCase().includes(query)) : rows
+  const channelFiltered =
+    sentimentStore.activeChannel === 'all'
+      ? rows
+      : rows.filter((r) => r.channel === sentimentStore.activeChannel)
+
+  // filter by searchQuery
+  const searchFiltered = searchQuery.value
+    ? channelFiltered.filter((r) =>
+        r.channel.toLowerCase().includes(searchQuery.value.trim().toLowerCase()),
+      )
+    : channelFiltered
 
   const field = sortField.value
   const dir = sortDirection.value // 'asc' | 'desc'
 
-  const sorted = filtered.sort((a, b) => {
+  const sorted = searchFiltered.sort((a, b) => {
     const av = a[field]
     const bv = b[field]
 

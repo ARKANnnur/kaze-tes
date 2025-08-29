@@ -43,11 +43,13 @@ onMounted(() => {
         </div>
         <!-- Charts -->
 
+        <!-- Daily Trends -->
         <div
           class="sm:col-span-2 rounded-xl border backdrop-blur-md bg-emerald-950/20 border-emerald-500/30 shadow-2xl group p-6"
         >
           <HistogramChart />
         </div>
+        <!-- Daily Trends -->
 
         <div
           class="rounded-xl border backdrop-blur-md bg-slate-950/20 border-slate-500/30 shadow-2xl group overflow-hidden flex items-center justify-center"
