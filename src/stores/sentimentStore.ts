@@ -62,7 +62,6 @@ export const useSentimentStore = defineStore('sentiment', () => {
       }
 
       const jsonData = await response.json()
-      console.log('Fetched Data:', jsonData[0].data)
 
       if (jsonData[0].meta && jsonData[0].meta.status === 1 && jsonData[0].data) {
         rawData.value = jsonData[0].data as SentimentResponse
