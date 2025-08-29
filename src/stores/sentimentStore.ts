@@ -56,15 +56,16 @@ export const useSentimentStore = defineStore('sentiment', () => {
     error.value = null
 
     try {
-      const response = await fetch('/src/assets/response.json')
+      const response = await fetch('https://67b28fe3bc0165def8cdd101.mockapi.io/kaze/sosmed')
       if (!response.ok) {
         throw new Error('Failed to load sentiment data')
       }
 
       const jsonData = await response.json()
+      console.log('Fetched Data:', jsonData[0].data)
 
-      if (jsonData.meta && jsonData.meta.status === 1 && jsonData.data) {
-        rawData.value = jsonData.data as SentimentResponse
+      if (jsonData[0].meta && jsonData[0].meta.status === 1 && jsonData[0].data) {
+        rawData.value = jsonData[0].data as SentimentResponse
       } else {
         throw new Error('Invalid data format')
       }
