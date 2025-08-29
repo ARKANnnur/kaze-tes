@@ -32,7 +32,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useSentimentStore } from '../stores/sentimentStore'
+import { useSentimentStore } from '../../stores/sentimentStore'
 
 const sentimentStore = useSentimentStore()
 const selectedChannel = ref('all')

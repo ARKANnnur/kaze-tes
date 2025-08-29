@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
-import { useSentimentStore } from '../stores/sentimentStore'
+import { useSentimentStore } from '../../stores/sentimentStore'
 
 const props = defineProps({
   chartType: {
