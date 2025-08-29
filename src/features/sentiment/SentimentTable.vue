@@ -1,6 +1,5 @@
 <template>
   <div class="p-2">
-    <!-- Header + Search -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
       <h3 class="text-lg font-semibold text-emerald-100">Sentiment Analysis by Channel</h3>
       <div class="relative">
@@ -114,7 +113,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useSentimentStore } from '../../stores/sentimentStore'
+import { useSentimentStore } from '@/stores/sentimentStore'
 import IconSort from '@/components/icons/IconSort.vue'
 
 const sentimentStore = useSentimentStore()

@@ -2,13 +2,13 @@
   <h3 class="text-lg font-semibold text-emerald-100 p-6">
     {{ chartTitle }}
   </h3>
-  <div ref="chartContainer" class="w-full h-80"></div>
+  <div ref="chartContainer" class="w-full"></div>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import ApexCharts from 'apexcharts'
-import { useSentimentStore } from '../../stores/sentimentStore'
+import { useSentimentStore } from '@/stores/sentimentStore'
 
 const props = defineProps({
   chartType: {
@@ -150,6 +150,7 @@ const chartOptions = computed(() => {
           horizontal: false,
           columnWidth: '55%',
           borderRadius: 8,
+          borderRadiusApplication: 'end',
           endingShape: 'rounded',
           distributed: true,
         },
