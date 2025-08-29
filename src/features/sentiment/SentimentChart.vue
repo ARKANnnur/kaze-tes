@@ -1,14 +1,13 @@
 <template>
-  <div class="bg-white rounded-lg shadow p-6">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">
-      {{ chartTitle }}
-    </h3>
-    <div ref="chartContainer" class="w-full h-80"></div>
-  </div>
+  <h3 class="text-lg font-semibold text-emerald-100 p-6">
+    {{ chartTitle }}
+  </h3>
+  <div ref="chartContainer" class="w-full h-80"></div>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import ApexCharts from 'apexcharts'
 import { useSentimentStore } from '../../stores/sentimentStore'
 
 const props = defineProps({
@@ -39,24 +38,39 @@ const chartOptions = computed(() => {
     chart: {
       type: props.chartType === 'pie' ? 'pie' : 'bar',
       height: 320,
-      toolbar: {
-        show: false,
-      },
+      toolbar: { show: false },
+      background: 'transparent',
+      foreColor: '#A7F3D0', // emerald-200 teks
+      fontFamily: 'Inter, sans-serif',
     },
-    colors: ['#3EC764', '#B3B6C6', '#ED3E3E'],
+    colors: [
+      'rgba(37, 240, 128, 0.8)', // Aqua glass
+      'rgba(203, 242, 236, 0.8)', // Sky glass
+      'rgba(233, 25, 25, 0.5)', // Pink glass
+    ],
     legend: {
       position: 'bottom',
+      labels: { colors: '#A7F3D0' },
+      fontSize: '13px',
+      fontWeight: 500,
+    },
+    grid: {
+      borderColor: 'rgba(16, 185, 129, 0.25)',
+      strokeDashArray: 4,
+    },
+    tooltip: {
+      theme: 'dark',
+      style: {
+        fontSize: '13px',
+        fontFamily: 'Inter, sans-serif',
+      },
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 640,
         options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
+          chart: { height: 260 },
+          legend: { fontSize: '12px' },
         },
       },
     ],
@@ -70,15 +84,39 @@ const chartOptions = computed(() => {
       plotOptions: {
         pie: {
           donut: {
-            size: '45%',
+            size: '60%',
+            background: 'transparent',
+            labels: {
+              show: true,
+              name: {
+                show: true,
+                fontSize: '14px',
+                color: '#A7F3D0',
+              },
+              value: {
+                show: true,
+                fontSize: '18px',
+                fontWeight: 600,
+                color: '#fff',
+              },
+              total: {
+                show: true,
+                label: 'Total',
+                color: '#A7F3D0',
+                fontSize: '13px',
+              },
+            },
           },
         },
       },
+      stroke: {
+        width: 2,
+        colors: '#00231F',
+      },
       dataLabels: {
         enabled: true,
-        formatter: function (val) {
-          return Math.round(val) + '%'
-        },
+        style: { colors: ['#F9FAFB'] }, // neutral-50
+        formatter: (val) => Math.round(val) + '%',
       },
     }
   } else {
@@ -86,50 +124,43 @@ const chartOptions = computed(() => {
       ...baseOptions,
       series: [
         {
-          name: 'Count',
+          name: 'Mentions',
           data: data.bar.series[0].data.map((item) => item.y),
         },
       ],
       xaxis: {
         categories: data.bar.categories,
+        labels: {
+          style: { colors: '#A7F3D0' },
+        },
+        axisBorder: { color: 'rgba(16, 185, 129, 0.4)' },
+        axisTicks: { color: 'rgba(16, 185, 129, 0.4)' },
+      },
+      yaxis: {
+        labels: {
+          style: { colors: '#A7F3D0' },
+        },
+        title: {
+          text: 'Mentions',
+          style: { color: '#A7F3D0', fontSize: '13px' },
+        },
       },
       plotOptions: {
         bar: {
           horizontal: false,
           columnWidth: '55%',
+          borderRadius: 8,
           endingShape: 'rounded',
+          distributed: true,
         },
       },
-      dataLabels: {
-        enabled: false,
-      },
-      yaxis: {
-        title: {
-          text: 'Number of Mentions',
-        },
-      },
+      dataLabels: { enabled: false },
     }
   }
 })
 
-const loadApexCharts = async () => {
-  if (window.ApexCharts) {
-    return window.ApexCharts
-  }
-
-  // Load ApexCharts from CDN
-  return new Promise((resolve) => {
-    const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/apexcharts'
-    script.onload = () => resolve(window.ApexCharts)
-    document.head.appendChild(script)
-  })
-}
-
 const renderChart = async () => {
   if (!chartOptions.value || !chartContainer.value) return
-
-  const ApexCharts = await loadApexCharts()
 
   if (chart) {
     chart.destroy()

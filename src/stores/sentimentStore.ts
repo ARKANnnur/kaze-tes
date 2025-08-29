@@ -3,11 +3,13 @@ import { ref, computed } from 'vue'
 
 /** Struktur data pie chart */
 interface PieData {
+  categories: any
   series: number[]
 }
 
 /** Struktur data tiap channel */
 interface ChannelData {
+  bar: any
   total: number
   pie: PieData
 }

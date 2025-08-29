@@ -1,10 +1,10 @@
 <template>
-  <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+  <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
     <div class="w-full">
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-100 mb-2 text-balance">
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-100 mb-2 text-balance">
         Sentiment Analysis Dashboard
       </h1>
-      <p className="text-base sm:text-lg text-emerald-200/70 text-pretty">
+      <p class="text-base sm:text-lg text-emerald-200/70 text-pretty">
         Social Media & News Sentiment Monitoring
       </p>
     </div>
