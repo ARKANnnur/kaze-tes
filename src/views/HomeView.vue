@@ -5,6 +5,7 @@ import { useSentimentStore } from '@/stores/sentimentStore'
 import Header from '@/components/ui/Header.vue'
 import Decoration from '@/components/ui/Decoration.vue'
 import SentimentTable from '@/features/sentiment/SentimentTable.vue'
+import Loader from '@/components/ui/Loader.vue'
 const SentimentChart = defineAsyncComponent(() => import('@/features/sentiment/SentimentChart.vue'))
 const HistogramChart = defineAsyncComponent(() => import('@/features/sentiment/HistogramChart.vue'))
 
@@ -24,21 +25,36 @@ onMounted(() => {
         <div
           class="sm:col-span-2 lg:col-span-2 xl:col-span-2 rounded-xl border backdrop-blur-md bg-emerald-950/20 border-emerald-500/30 shadow-2xl group p-6"
         >
-          <SentimentTable />
+          <div v-if="sentimentStore.isLoading" class="flex justify-center items-center z-50 h-full w-full">
+            <Loader />
+          </div>
+          <div v-else>
+            <SentimentTable />
+          </div>
         </div>
         <!-- Table -->
 
         <!-- Charts -->
-        <div class="space-y-4 sm:space-y-6">
+        <div class="space-y-4 sm:space-y-6 sm:col-span-2 lg:col-span-1">
           <div
             class="rounded-xl border backdrop-blur-md bg-slate-950/20 border-slate-500/30 shadow-2xl p-2"
           >
-            <SentimentChart chart-type="pie" />
+            <div v-if="sentimentStore.isLoading" class="flex justify-center items-center z-50 h-full w-full">
+              <Loader />
+            </div>
+            <div v-else>
+              <SentimentChart chart-type="pie" />
+            </div>
           </div>
           <div
             class="rounded-xl border backdrop-blur-md bg-slate-950/20 border-slate-500/30 shadow-2xl p-2"
           >
-            <SentimentChart chart-type="bar" />
+            <div v-if="sentimentStore.isLoading" class="flex justify-center items-center z-50 h-full w-full">
+              <Loader />
+            </div>
+            <div v-else>
+              <SentimentChart chart-type="bar" />
+            </div>
           </div>
         </div>
         <!-- Charts -->
